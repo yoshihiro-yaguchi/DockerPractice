@@ -3,7 +3,7 @@ version: '3'
 
 # どんなコンテナを立ち上げるか
 services:
-  
+
   # ------------------------
   # laravelを動かすコンテナ
   # ------------------------
@@ -23,11 +23,11 @@ services:
 # MySQLを動かすコンテナ
 # ------------------------
   db:
-    # DockerHubからMySQL5.7の公式イメージをダウンロードしてくる指定
+    # DockerHubからMySQL8.0の公式イメージをダウンロードしてくる指定
     image: mysql:8.0.30
     # コンテナ名を指定
     container_name: laravel_db
-    
+
     # コンテナ内の環境変数を指定。
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -35,12 +35,11 @@ services:
       MYSQL_USER: laravel_user
       MYSQL_PASSWORD: laravel_pass
       TZ: 'Asia/Tokyo'
-    
+
     # 起動時コマンド
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     # ディレクトリの同期 設定ファイルと
     volumes:
-      - ./docker/db/data:/var/lib/mysql
       - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - 3306:3306
